@@ -10,7 +10,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String body;
+    private String name;
 
     public long getId() {
         return id;
@@ -20,11 +20,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getBody() {
-        return body;
+    public String getName() {
+        return name;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setName(String name) {
+        this.name = name;
     }
 }
