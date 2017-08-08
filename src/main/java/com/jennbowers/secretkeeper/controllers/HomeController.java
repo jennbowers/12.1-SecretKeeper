@@ -22,10 +22,8 @@ public class HomeController {
     UserRepository userRepo;
 
     @RequestMapping("/")
-    public String index(Model model, Principal principal){
-        String username = principal.getName();
-        User user = userRepo.findByUsername(username);
-        Iterable<Secret> allSecrets = secretRepo.findAllByUser(user);
+    public String index(Model model){
+        Iterable<Secret> allSecrets = secretRepo.findAll();
         model.addAttribute("secrets", allSecrets);
         model.addAttribute("newSecret", new Secret());
         return "index";

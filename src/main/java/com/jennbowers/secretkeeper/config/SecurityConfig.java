@@ -34,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //                this is what happens when you log in
 //                tells it to apply this to everything
                 .authorizeRequests()
-                    .anyRequest().hasRole("USER")
+//                    .anyRequest().hasRole("USER")
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/secret/**").hasRole("USER")
                     .and()
 //                handles what happens when you login
                 .formLogin()
