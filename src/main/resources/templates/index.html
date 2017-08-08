@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>SecretKeeper</title>
+<head th:include="login :: indexHead">
+    <!--Technical Debt: make includes come from same place-->
 </head>
 <body>
-    <h1>What are your secrets?</h1>
+<!--Technical Debt: wrap nav in div so we can have consistent color-->
+    <nav th:fragment="navbar">
+        <div class="nav-wrapper container">
+            <a th:href="@{/}" class="brand-logo">Secrets</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a th:href="@{/secret/createSecret}">Create a Secret</a></li>
+                <li><a th:href="@{/}">See All Secrets</a></li>
+                <li><a th:href="@{/secret/mySecrets}">My Secrets</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>What are your secrets?</h1>
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout"/>
-    </form>
+        <!--<form th:action="@{/logout}" method="post">-->
+            <!--<input type="submit" value="Logout"/>-->
+        <!--</form>-->
 
-    <form th:action="@{/secret/createSecret}" method="post" th:object="${newSecret}">
-        <textarea th:field="*{body}" cols="65" rows="10"></textarea>
-        <input type="submit" value="Add Secret"/>
+        <div class="row">
+            <div class="col s12 m4" th:each="secret : ${secrets}">
+                <div class="card-panel blue-grey darken-2">
+                    <span class="white-text" th:text="${secret.body}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </form>
-
-    <ul>
-        <li th:each="secret: ${secrets}" th:text="${secret.body}"></li>
-    </ul>
+    <div th:include="login :: scripts"></div>
 </body>
 </html>

@@ -23,6 +23,12 @@ public class SecretController {
     @Autowired
     UserRepository userRepo;
 
+    @RequestMapping("/secret/createSecret")
+    public String createSecretForm(Model model){
+        model.addAttribute("newSecret", new Secret());
+        return "createSecret";
+    }
+
     @RequestMapping(value = "/secret/createSecret", method = RequestMethod.POST)
     public String createSecretForm(@RequestParam("body") String body,
                                    Principal principal) {
